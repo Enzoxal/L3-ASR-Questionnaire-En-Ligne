@@ -14,12 +14,13 @@ Noyau minimal:
 #5-Enregistrer les réponses (dépend de #4)
 
 Fonctionnalité complémentaire:
-#6-Affichage des questionnaire (coté administrateur)
-#7-Récuperer les résultats   (coté administrateur)
-#8-Ajouter ses propres questionnaires (coté adminstrateur)
-#9-Créer son propre questionnaire (coté administrateur) 
-#10-Interface administrateur / utilisateur 
-#11-Authentification d'accès  
+#6-Authentification d'accès
+#7-Affichage des questionnaire (coté administrateur)
+#8-Récuperer les résultats   (coté administrateur)
+#9-Ajouter ses propres questionnaires (coté adminstrateur)
+#10-Créer son propre questionnaire (coté administrateur) 
+#11-Interface administrateur / utilisateur 
+  
 
 Ordre de priorité: 
 Noyau minimal 
