@@ -1,0 +1,103 @@
+#1-Chargement des questionnaires à partir d'un fichier JSON
+- json
+- pathlib
+Service rendu: lecture du fichier JSON
+Limites :
+Installation : inclus
+Utilisation : facile
+Compatibilité : compatible
+Maintenance / communauté / documentation : ?
+#2-Accès via une URL
+- Flask
+Service rendu:
+Limites :
+Installation :
+Utilisation :
+Compatibilité :
+Maintenance / communauté / documentation :
+#3-Affichage du questionnaire
+- jinja2 
+- html/css
+Service rendu:
+Limites :
+Installation :
+Utilisation :
+Compatibilité :
+Maintenance / communauté / documentation :
+#4-Valider les réponses
+- re,datedime,decimal
+- pydantic
+- wtforms
+Service rendu:
+Limites :
+Installation :
+Utilisation :
+Compatibilité :
+Maintenance / communauté / documentation :
+#5-Enregistrer les réponses 
+- csv
+- os
+- pathlib
+Service rendu:
+Limites :
+Installation :
+Utilisation :
+Compatibilité :
+Maintenance / communauté / documentation :
+#6-Authentification d'accès
+- Flask-login
+- Flask-security
+(- bcrypt)
+Service rendu:
+Limites :
+Installation :
+Utilisation :
+Compatibilité :
+Maintenance / communauté / documentation :
+#7-Interface administrateur / utilisateur
+- Flask 
+- Jinja2
+Service rendu:
+Limites :
+Installation :
+Utilisation :
+Compatibilité :
+Maintenance / communauté / documentation :
+#8-Affichage des questionnaire 
+- Flask 
+- jinja2
+- html/css
+Service rendu:
+Limites :
+Installation :
+Utilisation :
+Compatibilité :
+Maintenance / communauté / documentation :
+#9-Récuperer les résultats
+- FLask
+- csv
+Service rendu:
+Limites :
+Installation :
+Utilisation :
+Compatibilité :
+Maintenance / communauté / documentation :
+#10-Ajouter ses propres questionnaires
+- json 
+- Flask
+- werkzeug
+Service rendu:
+Limites :
+Installation :
+Utilisation :
+Compatibilité :
+Maintenance / communauté / documentation :
+ #11-Créer son propre questionnaire
+- jinja2
+- json
+Service rendu:
+Limites :
+Installation :
+Utilisation :
+Compatibilité :
+Maintenance / communauté / documentation :
