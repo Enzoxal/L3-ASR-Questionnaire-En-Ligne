@@ -9,95 +9,90 @@ Compatibilité : compatible
 Maintenance / communauté / documentation : ?
 #2-Accès via une URL
 - Flask
-Service rendu:
-Limites :
-Installation :
-Utilisation :
-Compatibilité :
-Maintenance / communauté / documentation :
+Service rendu: création de routes, gestion des requêtes HTTP, affichage des pages
+Limites : minimaliste, certaines fonctionnalités doivent être ajoutées via extensions.
+Installation : PIP
+Utilisation : plutôt facile 
+Compatibilité : compatible
+Maintenance / communauté / documentation : 
 #3-Affichage du questionnaire
 - jinja2 
 - html/css
-Service rendu:
-Limites :
-Installation :
-Utilisation :
-Compatibilité :
+Service rendu: génération dynamique du formulaire à partir du JSON, mise en page du site
+Limites : 
+Installation : Inclus dans flask
+Utilisation : simple/normal
+Compatibilité : compatible
 Maintenance / communauté / documentation :
 #4-Valider les réponses
 - re,datedime,decimal
 - pydantic
 - wtforms
-Service rendu:
-Limites :
-Installation :
-Utilisation :
-Compatibilité :
+Service rendu: validation des valeurs, vérification des champs obligatoires pour du web
+Limites : 
+Installation : PIP
+Utilisation : simple/normal
+Compatibilité : Compatible
 Maintenance / communauté / documentation :
 #5-Enregistrer les réponses 
 - csv
 - os
 - pathlib
-Service rendu:
-Limites :
-Installation :
-Utilisation :
-Compatibilité :
+Service rendu: création du fichier CSV
+Limites : donnée simple, si donnée complexe alors plus compliqué
+Installation : 
+Utilisation : simple
+Compatibilité : compatible
 Maintenance / communauté / documentation :
 #6-Authentification d'accès
 - Flask-login
 - Flask-security
 (- bcrypt)
-Service rendu:
-Limites :
-Installation :
-Utilisation :
-Compatibilité :
+Service rendu: gestion des sessions, sécurisation
+Limites : 
+Installation : pip
+Utilisation : normal/compliqué
+Compatibilité : compatible
 Maintenance / communauté / documentation :
 #7-Interface administrateur / utilisateur
 - Flask 
 - Jinja2
-Service rendu:
-Limites :
-Installation :
-Utilisation :
-Compatibilité :
-Maintenance / communauté / documentation :
+service rendu: création de page séparé entre admin/utilisateur
 #8-Affichage des questionnaire 
 - Flask 
 - jinja2
 - html/css
-Service rendu:
+Service rendu: affichage
 Limites :
 Installation :
-Utilisation :
-Compatibilité :
+Utilisation : simple 
+Compatibilité : compatible
 Maintenance / communauté / documentation :
 #9-Récuperer les résultats
 - FLask
 - csv
-Service rendu:
-Limites :
+Service rendu: permettre à l’administrateur de télécharger le fichier CSV
+Limites : 
 Installation :
-Utilisation :
+Utilisation : simple
 Compatibilité :
 Maintenance / communauté / documentation :
 #10-Ajouter ses propres questionnaires
 - json 
 - Flask
-- werkzeug
-Service rendu:
+(- werkzeug )
+Service rendu: upload de fichiers JSON, validation et stockage
 Limites :
-Installation :
-Utilisation :
-Compatibilité :
+Installation : inclus dans flask (werkzeug)
+Utilisation : normal
+Compatibilité : compatible
 Maintenance / communauté / documentation :
  #11-Créer son propre questionnaire
 - jinja2
 - json
-Service rendu:
-Limites :
+Service rendu: interface permettant de générer un nouveau questionnaire JSON
+Limites : 
 Installation :
-Utilisation :
-Compatibilité :
+Utilisation : normal/complexe
+Compatibilité : compatible
 Maintenance / communauté / documentation :
