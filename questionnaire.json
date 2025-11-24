@@ -1,0 +1,31 @@
+{
+  "titre": "Questionnaire de culture générale",
+  "questions": [
+    {
+      "question": "Quelle est la capitale de la France ?",
+      "reponses": ["Paris", "Lyon", "Marseille"],
+      "bonne": 0
+    },
+    {
+      "question": "Quel est le plus grand océan du monde ?",
+      "reponses": ["Atlantique", "Pacifique", "Arctique"],
+      "bonne": 1
+    },
+    {
+      "question": "Combien font 9 × 7 ?",
+      "reponses": ["63", "56", "72"],
+      "bonne": 0
+    },
+    {
+      "question": "Quel animal est surnommé le 'roi de la jungle' ?",
+      "reponses": ["Tigre", "Lion", "Éléphant"],
+      "bonne": 1
+    },
+    {
+      "question": "Quelle planète est la plus proche du Soleil ?",
+      "reponses": ["Vénus", "Mercure", "Mars"],
+      "bonne": 1
+    }
+  ]
+}
+
