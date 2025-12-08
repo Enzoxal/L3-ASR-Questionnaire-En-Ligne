@@ -1,0 +1,210 @@
+{% extends "index.html" %}
+
+{% block title %}Admin - Créer questionnaire{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Créer un nouveau questionnaire</h2>
+
+<form method="POST" class="card p-4 shadow-sm">
+  <div class="form-group">
+    <label for="qid">Identifiant du questionnaire (nom du fichier sans .json)</label>
+    <input type="text" class="form-control" name="qid" required placeholder="ex: satisfaction, cours_python">
+  </div>
+
+  <hr>
+
+  <h4>Questions</h4>
+
+  <div id="questions-container">
+    <!-- Question 1 par défaut -->
+    <div class="question-block border p-3 mb-3" data-index="1">
+      <h5>Question 1</h5>
+
+      <div class="form-group">
+        <label for="key_1">Clé (unique, pour le CSV)</label>
+        <input type="text" class="form-control" name="key_1" placeholder="ex: age, avis, note_cours">
+      </div>
+
+      <div class="form-group">
+        <label for="label_1">Intitulé de la question</label>
+        <input type="text" class="form-control" name="label_1" placeholder="Texte de la question">
+      </div>
+
+      <div class="form-group">
+        <label for="desc_1">Description (optionnel)</label>
+        <input type="text" class="form-control" name="desc_1" placeholder="Texte d'aide (facultatif)">
+      </div>
+
+      <div class="form-group">
+        <label for="type_1">Type de réponse</label>
+        <select class="form-control" name="type_1">
+          <option value="text">Texte</option>
+          <option value="number">Nombre</option>
+          <option value="date">Date</option>
+          <option value="choice">Liste de valeurs (choix unique)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="required_1">
+          Question obligatoire
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>Options (si type = liste de valeurs)</label>
+        <div class="options-container">
+          <div class="option-row mb-2">
+            <input type="text" class="form-control" name="option_1_1" placeholder="Option 1">
+            <button type="button" class="btn btn-sm btn-outline-danger mt-1 remove-option d-none">
+              Supprimer cette option
+            </button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-primary mt-2 add-option">
+          Ajouter une option
+        </button>
+      </div>
+
+      <button type="button" class="btn btn-sm btn-outline-danger remove-question d-none">
+        Supprimer cette question
+      </button>
+    </div>
+  </div>
+
+  <button type="button" id="add-question" class="btn btn-outline-primary mt-2">
+    Ajouter une question
+  </button>
+
+  <button type="submit" class="btn btn.success mt-2">
+    Créer le questionnaire
+  </button>
+</form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const container = document.getElementById('questions-container');
+    const addQuestionBtn = document.getElementById('add-question');
+
+    let nextIndex = 1;
+
+    // Ajout d'une nouvelle question
+    addQuestionBtn.addEventListener('click', function () {
+      nextIndex++;
+
+      const firstBlock = container.querySelector('.question-block');
+      const newBlock = firstBlock.cloneNode(true);
+
+      newBlock.setAttribute('data-index', nextIndex);
+      newBlock.querySelector('h5').textContent = 'Question ' + nextIndex;
+
+      // Réinitialiser les champs de la nouvelle question
+      const inputs = newBlock.querySelectorAll('input, select');
+
+      inputs.forEach(input => {
+        const name = input.name || '';
+        // pour key_, label_, desc_, type_, required_
+        if (
+          name.startsWith('key_') ||
+          name.startsWith('label_') ||
+          name.startsWith('desc_') ||
+          name.startsWith('type_') ||
+          name.startsWith('required_')
+        ) {
+          const base = name.split('_')[0]; // exemple: "key"
+          input.name = base + '_' + nextIndex;
+
+          if (input.type === 'checkbox') {
+            input.checked = false;
+          } else if (input.tagName.toLowerCase() === 'select') {
+            input.value = 'text';
+          } else {
+            input.value = '';
+          }
+        }
+      });
+
+      // Réinitialiser les options pour cette nouvelle question
+      const optionsContainer = newBlock.querySelector('.options-container');
+      const optionRows = optionsContainer.querySelectorAll('.option-row');
+
+      optionRows.forEach((row, idx) => {
+        if (idx > 0) {
+          row.remove();
+        }
+      });
+
+      const firstRow = optionsContainer.querySelector('.option-row');
+      const optInput = firstRow.querySelector('input');
+      optInput.name = 'option_' + nextIndex + '_1';
+      optInput.value = '';
+
+      const removeOptBtn = firstRow.querySelector('.remove-option');
+      removeOptBtn.classList.add('d-none');
+
+      // bouton supprimer question visible pour les clones
+      const removeQuestionBtn = newBlock.querySelector('.remove-question');
+      removeQuestionBtn.classList.remove('d-none');
+
+      container.appendChild(newBlock);
+    });
+
+    // Gestion des clics dans le container (supprimer question / ajouter option / supprimer option)
+    container.addEventListener('click', function (e) {
+      const target = e.target;
+
+      // Supprimer une question
+      if (target.classList.contains('remove-question')) {
+        const blocks = container.querySelectorAll('.question-block');
+        if (blocks.length > 1) {
+          target.closest('.question-block').remove();
+        }
+        return;
+      }
+
+      // Ajouter une option
+      if (target.classList.contains('add-option')) {
+        const questionBlock = target.closest('.question-block');
+        const qIndex = questionBlock.getAttribute('data-index');
+        const optionsContainer = questionBlock.querySelector('.options-container');
+        const optionRows = optionsContainer.querySelectorAll('.option-row');
+        const newOptIndex = optionRows.length + 1;
+
+        const firstRow = optionRows[0];
+        const newRow = firstRow.cloneNode(true);
+
+        const input = newRow.querySelector('input');
+        input.name = 'option_' + qIndex + '_' + newOptIndex;
+        input.value = '';
+
+        const removeOptBtn = newRow.querySelector('.remove-option');
+        removeOptBtn.classList.remove('d-none');
+
+        optionsContainer.appendChild(newRow);
+        return;
+      }
+
+      // Supprimer une option
+      if (target.classList.contains('remove-option')) {
+        const questionBlock = target.closest('.question-block');
+        const optionsContainer = questionBlock.querySelector('.options-container');
+        const optionRows = optionsContainer.querySelectorAll('.option-row');
+
+        if (optionRows.length > 1) {
+          target.closest('.option-row').remove();
+        }
+
+        // Si il ne reste qu'une option, on cache le bouton "supprimer" de cette dernière
+        const remainingRows = optionsContainer.querySelectorAll('.option-row');
+        if (remainingRows.length === 1) {
+          const btn = remainingRows[0].querySelector('.remove-option');
+          btn.classList.add('d-none');
+        }
+
+        return;
+      }
+    });
+  });
+</script>
+{% endblock %}

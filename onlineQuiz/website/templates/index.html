@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
     <link
@@ -19,76 +20,80 @@
   </head>
 
   <body>
-    <nav class="nav navbar-expand-lg navbar-dark bg-dark">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{{ url_for('views.home') }}">OnlineQuiz</a>
+
       <button
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
-        data-target="#navbar"
+        data-target="#navbarNav"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbar">
+
+      <div class="collapse navbar-collapse" id="navbarNav">
         <div class="navbar-nav">
-  <nav class="navbar-nav">
-    {% if user.is_authenticated %}
-    <a href="/quiz" class="nav-item nav-link" id="quiz">Quiz</a> <a href="/logout" class="nav-item nav-link" id="logout">Logout</a>
-    <a href="/" class="nav-item nav-link" id="home">Home</a>
-    {% else %}
-    <a href="/login" class="nav-item nav-link" id="login">Login</a>
-    <a href="/sign-up" class="nav-item nav-link" id="signUP">Sign Up</a>
-    {% endif %}
-  </nav>
-</div>
+          {% if user.is_authenticated %}
+            <a href="{{ url_for('views.home') }}" class="nav-item nav-link" id="home">Home</a>
+            <a href="{{ url_for('views.quiz') }}" class="nav-item nav-link" id="quiz">Questionnaire</a>
+            {% if user.is_admin %}
+              <a href="{{ url_for('views.admin_questionnaires') }}" class="nav-item nav-link">Admin</a>
+            {% endif %}
+            <a href="{{ url_for('auth.logout') }}" class="nav-item nav-link" id="logout">Logout</a>
+          {% else %}
+            <a href="{{ url_for('auth.login') }}" class="nav-item nav-link" id="login">Login</a>
+            <a href="{{ url_for('auth.sign_up') }}" class="nav-item nav-link" id="signUP">Sign Up</a>
+          {% endif %}
+        </div>
       </div>
     </nav>
 
-    <!--************************FLASH MESSAGES SECTION ************************************-->
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %} {% if category ==
-    'error' %}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      {{ message }}
-      <button
-        type="button"
-        class="close"
-        data-dismiss="alert"
-        aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <!-- FLASH MESSAGES -->
+    <div class="container mt-3">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            {% if category == 'error' %}
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% else %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
     </div>
-    {% else %}
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      {{ message }}
-      <button
-        type="button"
-        class="close"
-        data-dismiss="alert"
-        aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
+
+    <!-- CONTENU -->
+    <div class="container my-4">
+      {% block content %}{% endblock %}
     </div>
-    {% endif %} {% endfor %} {% endif %} {% endwith %}
 
-    <div class="container">{% block content %}{% endblock %}</div>
-
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
+    <!-- JS Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script
       type="text/javascript"
