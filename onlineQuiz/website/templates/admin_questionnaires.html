@@ -15,7 +15,7 @@
 </div>
 
 {% if questionnaires %}
-<table class="table table-striped">
+<table class="table table-striped align-middle">
   <thead>
     <tr>
       <th>ID</th>
@@ -29,12 +29,29 @@
       <td>{{ q.id }}</td>
       <td>{{ q.filename }}</td>
       <td>
-        <a href="{{ url_for('views.questionnaire', qid=q.id) }}" class="btn btn-sm btn-primary">
+
+        <!-- Répondre -->
+        <a href="{{ url_for('views.questionnaire', qid=q.id) }}"
+           class="btn btn-sm btn-primary">
           Répondre
         </a>
-        <a href="{{ url_for('views.admin_questionnaire_results', qid=q.id) }}" class="btn btn-sm btn-secondary">
+
+        <!-- Voir résultats -->
+        <a href="{{ url_for('views.admin_questionnaire_results', qid=q.id) }}"
+           class="btn btn-sm btn-secondary">
           Voir résultats
         </a>
+
+        <!-- Supprimer -->
+        <form method="POST"
+              action="{{ url_for('views.admin_delete_questionnaire', qid=q.id) }}"
+              style="display:inline;"
+              onsubmit="return confirm('⚠️ Supprimer définitivement ce questionnaire et tous ses résultats ?');">
+          <button type="submit" class="btn btn-sm btn-danger">
+            Supprimer
+          </button>
+        </form>
+
         {% if not q.has_results %}
           <span class="text-muted ml-2">(aucun résultat)</span>
         {% endif %}

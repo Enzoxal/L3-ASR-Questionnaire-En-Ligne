@@ -1,9 +1,13 @@
-from . import db  # to use the db instance from __init__.py
-from flask_login import UserMixin # to manage user sessions
+from . import db
+from flask_login import UserMixin
+
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key = True)
-    email = db.Column(db.String(150), unique = True)
-    password = db.Column(db.String(150))
-    first_name = db.Column(db.String(150))
+    id = db.Column(db.Integer, primary_key=True)
 
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password = db.Column(db.String(150), nullable=False)
+    first_name = db.Column(db.String(150), nullable=False)
+
+    # Pour distinguer admin / utilisateur
+    is_admin = db.Column(db.Boolean, default=False)
