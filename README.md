@@ -63,7 +63,7 @@ onlineQuiz → Dossier global
 	|→ view.py → Gère les route url et les principale fonctionnalité de notre site 
 
 Répartition du travail :
-Hani Hettak → init.py, view.py → ligne : début 162 (fonctionnalité : gestion des format, type de réponse, fonctionnement d ‘un questionnaire etc ...) , html
+Hani Hettak → init.py, view.py → ligne : début - 162 (fonctionnalité : gestion des format, type de réponse, fonctionnement d ‘un questionnaire etc ...) , html
 Thomas Galinier →model.py ,view..py→ ligne : 163- 314 (fonctionnalité : afffichage questionnaire utilisateur, type de réponse, sauvegarde des réponse format csv…  )  , html
 Said Guermour → base de donnée, auth.py (connexion, deconnexion , inscription) , html
 Enzo Zekhmi → view.py ligne 315 – fin  → fonctionnalité administrateur ( affichage des questionnaires, import, suppression, affichage des resultats, récuperation des résultats, creation des questionnaires...), html
